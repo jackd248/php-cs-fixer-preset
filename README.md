@@ -32,7 +32,7 @@ use KonradMichalik\PhpCsFixerPreset\Rules\Set\Set;
 use Symfony\Component\Finder\Finder;
 
 return Config::create()
-    // Header Comment Rule
+    // Header Comment Rule with manual data
     ->withRule(
         Header::create(
             'konradmichalik/php-cs-fixer-preset',
@@ -41,13 +41,11 @@ return Config::create()
             CopyrightRange::from(2025),
         ),
     )
-    // Header Comment Rule with Composer
+    // Header Comment Rule with Composer Detection
     ->withRule(
-        Header::create(
-            'konradmichalik/php-cs-fixer-preset',
-            Type::ComposerPackage,
-            Author::fromComposer(__DIR__ . '/composer.json'),
-            CopyrightRange::from(2025),
+        Header::fromComposer(
+            __DIR__ . '/composer.json',
+            copyrightRange: CopyrightRange::from(2025) // Optional overwrite specific composer information
         ),
     )
     // Custom Rule
@@ -62,7 +60,7 @@ return Config::create()
 
 ## 💎 Credits
 
-This project is highly inspired by the fabulous [php-cs-fixer-config](https://github.com/eliashaeussler/php-cs-fixer-config) package.
+This project is highly inspired by the fabulous [php-cs-fixer-config](https://github.com/eliashaeussler/php-cs-fixer-config) package by [Elias Häußler](https://github.com/eliashaeussler).
 
 ## ⭐ License
 

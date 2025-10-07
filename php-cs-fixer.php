@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *
@@ -12,7 +12,6 @@ declare(strict_types=1);
  */
 
 use KonradMichalik\PhpCsFixerPreset\Config;
-use KonradMichalik\PhpCsFixerPreset\Package\{Author, CopyrightRange, Type};
 use KonradMichalik\PhpCsFixerPreset\Rules\Header;
 use KonradMichalik\PhpCsFixerPreset\Rules\Set\Set;
 use KonradMichalik\PhpDocBlockHeaderFixer\Generators\DocBlockHeader;
@@ -24,11 +23,8 @@ return Config::create()
         new DocBlockHeaderFixer(),
     ])
     ->withRule(
-        Header::create(
-            'konradmichalik/php-cs-fixer-preset',
-            Type::ComposerPackage,
-            Author::fromComposer(__DIR__.'/composer.json'),
-            CopyrightRange::from(2025),
+        Header::fromComposer(
+            __DIR__.'/composer.json',
         ),
     )
     ->withRule(

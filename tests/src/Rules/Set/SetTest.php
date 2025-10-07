@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *

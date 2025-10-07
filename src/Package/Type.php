@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *
@@ -26,4 +26,14 @@ enum Type: string
     case SymfonyProject = 'Symfony project';
     case TYPO3Extension = 'TYPO3 CMS extension';
     case TYPO3Project = 'TYPO3 CMS project';
+
+    public static function fromComposerType(string $composerType): self
+    {
+        return match ($composerType) {
+            'composer-plugin' => self::ComposerPlugin,
+            'symfony-bundle' => self::SymfonyProject,
+            'typo3-cms-extension' => self::TYPO3Extension,
+            default => self::ComposerPackage,
+        };
+    }
 }

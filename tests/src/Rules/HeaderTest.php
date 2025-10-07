@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *
@@ -125,7 +125,7 @@ final class HeaderTest extends TestCase
     public function testToStringWithoutAuthors(): void
     {
         $header = Header::create('test/package', Type::ComposerPackage);
-        $result = $header->toString();
+        $result = $header->__toString();
 
         self::assertStringContainsString('This file is part of the "test/package" Composer package.', $result);
         self::assertStringContainsString('For the full copyright and license information', $result);
@@ -143,7 +143,7 @@ final class HeaderTest extends TestCase
             $copyrightRange,
         );
 
-        $result = $header->toString();
+        $result = $header->__toString();
 
         self::assertStringContainsString('This file is part of the "test/package" Composer package.', $result);
         self::assertStringContainsString('(c) 2025 John Doe <john@example.com>', $result);
@@ -164,7 +164,7 @@ final class HeaderTest extends TestCase
             $copyrightRange,
         );
 
-        $result = $header->toString();
+        $result = $header->__toString();
 
         self::assertStringContainsString('(c) 2025 John Doe <john@example.com>', $result);
         self::assertStringContainsString('(c) 2025 Jane Smith <jane@example.com>', $result);
@@ -173,7 +173,7 @@ final class HeaderTest extends TestCase
     public function testToStringWithDifferentPackageTypes(): void
     {
         $header = Header::create('test/plugin', Type::ComposerPlugin);
-        $result = $header->toString();
+        $result = $header->__toString();
 
         self::assertStringContainsString('This file is part of the "test/plugin" Composer plugin.', $result);
     }
@@ -189,8 +189,44 @@ final class HeaderTest extends TestCase
             $copyrightRange,
         );
 
-        $result = $header->toString();
+        $result = $header->__toString();
 
         self::assertStringContainsString('(c) 2020-2025 John Doe <john@example.com>', $result);
+    }
+
+    public function testToStringWithAuthorsButNoCopyrightRange(): void
+    {
+        $author = Author::create('John Doe', 'john@example.com');
+        $header = Header::create(
+            'test/package',
+            Type::ComposerPackage,
+            $author,
+        );
+
+        $result = $header->__toString();
+
+        self::assertStringContainsString('This file is part of the "test/package" Composer package.', $result);
+        self::assertStringContainsString('(c) John Doe <john@example.com>', $result);
+        self::assertStringNotContainsString('2025', $result);
+        self::assertStringContainsString('For the full copyright and license information', $result);
+    }
+
+    public function testToStringWithMultipleAuthorsButNoCopyrightRange(): void
+    {
+        $authors = [
+            Author::create('John Doe', 'john@example.com'),
+            Author::create('Jane Smith', 'jane@example.com'),
+        ];
+        $header = Header::create(
+            'test/package',
+            Type::ComposerPackage,
+            $authors,
+        );
+
+        $result = $header->__toString();
+
+        self::assertStringContainsString('(c) John Doe <john@example.com>', $result);
+        self::assertStringContainsString('(c) Jane Smith <jane@example.com>', $result);
+        self::assertStringNotContainsString('2025', $result);
     }
 }

@@ -43,6 +43,11 @@
 		},
 		"sort-packages": true
 	},
+	"extra": {
+		"konradmichalik/php-cs-fixer-preset": {
+			"copyright": 2025
+		}
+	},
 	"scripts": {
 		"fix": [
 			"@fix:composer",

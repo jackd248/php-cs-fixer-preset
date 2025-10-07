@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *
@@ -15,6 +15,7 @@ namespace KonradMichalik\PhpCsFixerPreset\Tests\Package;
 
 use JsonException;
 use KonradMichalik\PhpCsFixerPreset\Package\Author;
+use KonradMichalik\PhpCsFixerPreset\Service\ComposerService;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Stringable;
@@ -87,7 +88,8 @@ final class AuthorTest extends TestCase
 
     public function testFromComposerReadsAuthorsFromFile(): void
     {
-        $authors = Author::fromComposer(__DIR__.'/../../../composer.json');
+        $composerData = ComposerService::readComposerJson(__DIR__.'/../../../composer.json');
+        $authors = ComposerService::extractAuthors($composerData);
 
         self::assertIsArray($authors);
         self::assertNotEmpty($authors);
@@ -99,7 +101,8 @@ final class AuthorTest extends TestCase
         $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
         file_put_contents($tmpFile, '{"name":"test/package"}');
 
-        $authors = Author::fromComposer($tmpFile);
+        $composerData = ComposerService::readComposerJson($tmpFile);
+        $authors = ComposerService::extractAuthors($composerData);
 
         self::assertIsArray($authors);
         self::assertEmpty($authors);
@@ -112,7 +115,7 @@ final class AuthorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Composer file not found at: /non/existent/composer.json');
 
-        Author::fromComposer('/non/existent/composer.json');
+        ComposerService::readComposerJson('/non/existent/composer.json');
     }
 
     public function testFromComposerThrowsExceptionWhenFileCannotBeRead(): void
@@ -125,7 +128,7 @@ final class AuthorTest extends TestCase
         $this->expectExceptionMessage('Failed to read composer file at:');
 
         try {
-            @Author::fromComposer($tmpFile);
+            @ComposerService::readComposerJson($tmpFile);
         } finally {
             chmod($tmpFile, 0644);
             unlink($tmpFile);
@@ -140,7 +143,7 @@ final class AuthorTest extends TestCase
         $this->expectException(JsonException::class);
 
         try {
-            Author::fromComposer($tmpFile);
+            ComposerService::readComposerJson($tmpFile);
         } finally {
             unlink($tmpFile);
         }
@@ -156,7 +159,8 @@ final class AuthorTest extends TestCase
             ],
         ]));
 
-        $authors = Author::fromComposer($tmpFile);
+        $composerData = ComposerService::readComposerJson($tmpFile);
+        $authors = ComposerService::extractAuthors($composerData);
 
         self::assertCount(2, $authors);
         self::assertSame('John Doe', $authors[0]->name);
@@ -180,7 +184,8 @@ final class AuthorTest extends TestCase
             ],
         ]));
 
-        $authors = Author::fromComposer($tmpFile);
+        $composerData = ComposerService::readComposerJson($tmpFile);
+        $authors = ComposerService::extractAuthors($composerData);
 
         self::assertCount(2, $authors);
         self::assertSame('John Doe', $authors[0]->name);

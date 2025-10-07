@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "konradmichalik/php-cs-fixer-preset" Composer package.
+ * This file is part of the "php-cs-fixer-preset" Composer package.
  *
  * (c) 2025 Konrad Michalik <hej@konradmichalik.dev>
  *
@@ -99,5 +99,40 @@ final class TypeTest extends TestCase
         $type = Type::tryFrom('Invalid package type');
 
         self::assertNull($type);
+    }
+
+    public function testFromComposerTypeReturnsComposerPlugin(): void
+    {
+        $type = Type::fromComposerType('composer-plugin');
+
+        self::assertSame(Type::ComposerPlugin, $type);
+    }
+
+    public function testFromComposerTypeReturnsSymfonyProject(): void
+    {
+        $type = Type::fromComposerType('symfony-bundle');
+
+        self::assertSame(Type::SymfonyProject, $type);
+    }
+
+    public function testFromComposerTypeReturnsTYPO3Extension(): void
+    {
+        $type = Type::fromComposerType('typo3-cms-extension');
+
+        self::assertSame(Type::TYPO3Extension, $type);
+    }
+
+    public function testFromComposerTypeReturnsComposerPackageForUnknownType(): void
+    {
+        $type = Type::fromComposerType('some-unknown-type');
+
+        self::assertSame(Type::ComposerPackage, $type);
+    }
+
+    public function testFromComposerTypeReturnsComposerPackageForLibrary(): void
+    {
+        $type = Type::fromComposerType('library');
+
+        self::assertSame(Type::ComposerPackage, $type);
     }
 }
