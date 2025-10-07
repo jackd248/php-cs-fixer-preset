@@ -1,0 +1,12 @@
+parameters:
+	level: 8
+	paths:
+		- src
+		- tests/src
+	treatPhpDocTypesAsCertain: false
+	ignoreErrors:
+		- '#Call to static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\) with .* will always evaluate to true#'
+
+includes:
+	- vendor/phpstan/phpstan-symfony/extension.neon
+	- vendor/phpstan/phpstan-phpunit/extension.neon
