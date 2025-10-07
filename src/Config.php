@@ -16,7 +16,7 @@ namespace KonradMichalik\PhpCsFixerPreset;
 use KonradMichalik\PhpCsFixerPreset\Rules\Rule;
 use KonradMichalik\PhpCsFixerPreset\Rules\Set\DefaultSet;
 use PhpCsFixer\{ConfigInterface, Runner};
-use Symfony\Component\Finder;
+use Symfony\Component\Finder\Finder;
 
 use function array_replace_recursive;
 use function class_exists;
@@ -29,10 +29,14 @@ use function class_exists;
  */
 final class Config extends \PhpCsFixer\Config
 {
-    public static function create(): self
+    public static function create(bool $skipDefaultSet = false): self
     {
         $config = new self();
-        $config->withRule(DefaultSet::create(), false);
+
+        if (!$skipDefaultSet) {
+            $config->withRule(DefaultSet::create(), false);
+        }
+
         $config->setRiskyAllowed(true);
         $config->getFinder()->ignoreDotFiles(false);
         $config->getFinder()->ignoreVCSIgnored(true);
@@ -59,11 +63,11 @@ final class Config extends \PhpCsFixer\Config
     }
 
     /**
-     * @param Finder\Finder|callable(Finder\Finder): Finder\Finder $finder
+     * @param Finder|callable(Finder): Finder $finder
      */
-    public function withFinder(Finder\Finder|callable $finder): self
+    public function withFinder(Finder|callable $finder): self
     {
-        if (!($finder instanceof Finder\Finder)) {
+        if (!($finder instanceof Finder)) {
             $finder = $finder($this->getFinder());
         }
 
