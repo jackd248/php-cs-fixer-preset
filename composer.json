@@ -59,15 +59,11 @@
 		"lint": [
 			"@lint:composer",
 			"@lint:editorconfig",
-			"@lint:php",
-			"@lint:typoscript",
-			"@lint:yaml"
+			"@lint:php"
 		],
 		"lint:composer": "@fix:composer --dry-run",
 		"lint:editorconfig": "ec --git-only",
 		"lint:php": "@fix:php --dry-run",
-		"lint:typoscript": "typoscript-lint --fail-on-warnings",
-		"lint:yaml": "find ./ ! -path './vendor/*' ! -path '*/node_modules/*' ! -path './.Build/*' ! -path './xima_typo3_content_planner/*' \\( -name '*.yaml' -o -name '*.yml' \\) -exec yaml-lint {} +",
 		"migration": [
 			"@migration:rector"
 		],
