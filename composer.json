@@ -3,6 +3,13 @@
 	"description": "Preset configuration for PHP-CS-Fixer",
 	"license": "GPL-3.0-or-later",
 	"type": "library",
+	"authors": [
+		{
+			"name": "Konrad Michalik",
+			"email": "hej@konradmichalik.dev",
+			"role": "Maintainer"
+		}
+	],
 	"require": {
 		"php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
 		"friendsofphp/php-cs-fixer": "^3.14",
