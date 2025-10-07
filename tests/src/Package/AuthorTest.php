@@ -117,13 +117,14 @@ final class AuthorTest extends TestCase
     public function testFromComposerThrowsExceptionWhenFileCannotBeRead(): void
     {
         $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        file_put_contents($tmpFile, '{"name":"test"}');
         chmod($tmpFile, 0000);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Failed to read composer file at:');
 
         try {
-            Author::fromComposer($tmpFile);
+            @Author::fromComposer($tmpFile);
         } finally {
             chmod($tmpFile, 0644);
             unlink($tmpFile);
@@ -135,8 +136,7 @@ final class AuthorTest extends TestCase
         $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
         file_put_contents($tmpFile, 'invalid json');
 
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Failed to parse composer file at:');
+        $this->expectException(\JsonException::class);
 
         try {
             Author::fromComposer($tmpFile);

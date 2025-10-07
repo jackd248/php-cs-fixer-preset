@@ -65,9 +65,6 @@ final class Author implements Stringable
         }
 
         $data = json_decode($contents, true, 512, \JSON_THROW_ON_ERROR);
-        if (!is_array($data)) {
-            throw new RuntimeException(sprintf('Failed to parse composer file at: %s', $composerJsonPath));
-        }
 
         if (!isset($data['authors']) || !is_array($data['authors'])) {
             return [];
