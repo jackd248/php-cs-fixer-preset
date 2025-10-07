@@ -5,7 +5,7 @@ parameters:
 		- tests/src
 	treatPhpDocTypesAsCertain: false
 	ignoreErrors:
-		- '#Call to static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\) with .* will always evaluate to true#'
+		- '#Call to static method PHPUnit\\Framework\\Assert::(assertInstanceOf|assertTrue|assertFalse|assertSame)\(\) with .* will always evaluate to true#'
 
 includes:
 	- vendor/phpstan/phpstan-symfony/extension.neon
