@@ -16,6 +16,9 @@ This package provides a basic [PHP-CS-Fixer](https://github.com/PHP-CS-Fixer/PHP
 
 ## 🔥 Installation
 
+[![Packagist](https://img.shields.io/packagist/v/konradmichalik/php-cs-fixer-preset?label=version&logo=packagist)](https://packagist.org/packages/konradmichalik/php-cs-fixer-preset)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/konradmichalik/php-cs-fixer-preset?color=brightgreen)](https://packagist.org/packages/konradmichalik/php-cs-fixer-preset)
+
 ```bash
 composer require konradmichalik/php-cs-fixer-preset --dev
 ```
@@ -35,7 +38,7 @@ return Config::create()
     // Header Comment Rule with manual data
     ->withRule(
         Header::create(
-            'konradmichalik/php-cs-fixer-preset',
+            'php-cs-fixer-preset',
             Type::ComposerPackage,
             Author::create('Konrad Michalik', 'hej@konradmichalik.dev'),
             CopyrightRange::from(2025),
@@ -44,7 +47,6 @@ return Config::create()
     // Header Comment Rule with Composer Detection
     ->withRule(
         Header::fromComposer(
-            __DIR__ . '/composer.json',
             copyrightRange: CopyrightRange::from(2025) // Optional overwrite specific composer information
         ),
     )
