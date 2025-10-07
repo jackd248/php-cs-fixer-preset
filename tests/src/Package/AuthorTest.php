@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace KonradMichalik\PhpCsFixerPreset\Tests\Package;
 
+use JsonException;
 use KonradMichalik\PhpCsFixerPreset\Package\Author;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -136,7 +137,7 @@ final class AuthorTest extends TestCase
         $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
         file_put_contents($tmpFile, 'invalid json');
 
-        $this->expectException(\JsonException::class);
+        $this->expectException(JsonException::class);
 
         try {
             Author::fromComposer($tmpFile);
