@@ -27,7 +27,7 @@ return Config::create()
         Header::create(
             'konradmichalik/php-cs-fixer-preset',
             Type::ComposerPackage,
-            Author::create('Konrad Michalik', 'hej@konradmichalik.dev'),
+            Author::fromComposer(__DIR__.'/composer.json'),
             CopyrightRange::from(2025),
         ),
     )

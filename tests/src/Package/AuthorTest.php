@@ -15,6 +15,7 @@ namespace KonradMichalik\PhpCsFixerPreset\Tests\Package;
 
 use KonradMichalik\PhpCsFixerPreset\Package\Author;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Stringable;
 
 /**
@@ -81,5 +82,109 @@ final class AuthorTest extends TestCase
 
         self::assertSame('john.doe+test@sub.example.com', $author->emailAddress);
         self::assertSame('John Doe <john.doe+test@sub.example.com>', (string) $author);
+    }
+
+    public function testFromComposerReadsAuthorsFromFile(): void
+    {
+        $authors = Author::fromComposer(__DIR__.'/../../../composer.json');
+
+        self::assertIsArray($authors);
+        self::assertNotEmpty($authors);
+        self::assertContainsOnlyInstancesOf(Author::class, $authors);
+    }
+
+    public function testFromComposerReturnsEmptyArrayWhenNoAuthors(): void
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        file_put_contents($tmpFile, '{"name":"test/package"}');
+
+        $authors = Author::fromComposer($tmpFile);
+
+        self::assertIsArray($authors);
+        self::assertEmpty($authors);
+
+        unlink($tmpFile);
+    }
+
+    public function testFromComposerThrowsExceptionWhenFileNotFound(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Composer file not found at: /non/existent/composer.json');
+
+        Author::fromComposer('/non/existent/composer.json');
+    }
+
+    public function testFromComposerThrowsExceptionWhenFileCannotBeRead(): void
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        chmod($tmpFile, 0000);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Failed to read composer file at:');
+
+        try {
+            Author::fromComposer($tmpFile);
+        } finally {
+            chmod($tmpFile, 0644);
+            unlink($tmpFile);
+        }
+    }
+
+    public function testFromComposerThrowsExceptionWhenJsonIsInvalid(): void
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        file_put_contents($tmpFile, 'invalid json');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Failed to parse composer file at:');
+
+        try {
+            Author::fromComposer($tmpFile);
+        } finally {
+            unlink($tmpFile);
+        }
+    }
+
+    public function testFromComposerParsesMultipleAuthors(): void
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        file_put_contents($tmpFile, json_encode([
+            'authors' => [
+                ['name' => 'John Doe', 'email' => 'john@example.com'],
+                ['name' => 'Jane Smith', 'email' => 'jane@example.com'],
+            ],
+        ]));
+
+        $authors = Author::fromComposer($tmpFile);
+
+        self::assertCount(2, $authors);
+        self::assertSame('John Doe', $authors[0]->name);
+        self::assertSame('john@example.com', $authors[0]->emailAddress);
+        self::assertSame('Jane Smith', $authors[1]->name);
+        self::assertSame('jane@example.com', $authors[1]->emailAddress);
+
+        unlink($tmpFile);
+    }
+
+    public function testFromComposerSkipsInvalidAuthors(): void
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'composer');
+        file_put_contents($tmpFile, json_encode([
+            'authors' => [
+                ['name' => 'John Doe', 'email' => 'john@example.com'],
+                ['name' => 'No Email'],
+                ['email' => 'noname@example.com'],
+                'invalid',
+                ['name' => 'Jane Smith', 'email' => 'jane@example.com'],
+            ],
+        ]));
+
+        $authors = Author::fromComposer($tmpFile);
+
+        self::assertCount(2, $authors);
+        self::assertSame('John Doe', $authors[0]->name);
+        self::assertSame('Jane Smith', $authors[1]->name);
+
+        unlink($tmpFile);
     }
 }
