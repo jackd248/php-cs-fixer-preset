@@ -16,7 +16,6 @@ use Rector\Set\ValueObject\LevelSetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 use Rector\ValueObject\PhpVersion;
 
-
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/src',
