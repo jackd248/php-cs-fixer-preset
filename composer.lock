@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8d28964436426aa0f5f65f50dc77e1c",
+    "content-hash": "eb2d9f3f0ea7b3c8f7175d8bce2668ea",
     "packages": [
         {
             "name": "clue/ndjson-react",
@@ -3316,31 +3316,31 @@
         },
         {
             "name": "konradmichalik/php-doc-block-header-fixer",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jackd248/php-doc-block-header-fixer.git",
-                "reference": "828a73fa572ea60e277e0a07c2f68c16343f844c"
+                "reference": "9f5067f879e593f679ed07ab61d7c0a59f37e561"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jackd248/php-doc-block-header-fixer/zipball/828a73fa572ea60e277e0a07c2f68c16343f844c",
-                "reference": "828a73fa572ea60e277e0a07c2f68c16343f844c",
+                "url": "https://api.github.com/repos/jackd248/php-doc-block-header-fixer/zipball/9f5067f879e593f679ed07ab61d7c0a59f37e561",
+                "reference": "9f5067f879e593f679ed07ab61d7c0a59f37e561",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "friendsofphp/php-cs-fixer": "^3.14",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
             "require-dev": {
-                "armin/editorconfig-cli": "^1.0 || ^2.0",
+                "armin/editorconfig-cli": "^2.0",
                 "ergebnis/composer-normalize": "^2.44",
                 "konradmichalik/php-cs-fixer-preset": "^0.1.0",
                 "phpstan/phpstan": "^2.0",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-symfony": "^2.0",
-                "phpunit/phpunit": "^10.2 || ^11.0 || ^12.0",
+                "phpunit/phpunit": "^11.0 || ^12.0",
                 "rector/rector": "^2.2"
             },
             "type": "library",
@@ -3372,9 +3372,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jackd248/php-doc-block-header-fixer/issues",
-                "source": "https://github.com/jackd248/php-doc-block-header-fixer/tree/0.3.1"
+                "source": "https://github.com/jackd248/php-doc-block-header-fixer/tree/0.3.2"
             },
-            "time": "2025-10-23T12:21:39+00:00"
+            "time": "2025-11-24T14:10:46+00:00"
         },
         {
             "name": "localheinz/diff",
@@ -5530,7 +5530,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"

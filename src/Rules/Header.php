@@ -28,16 +28,16 @@ use function sprintf;
  * @author Konrad Michalik <hej@konradmichalik.dev>
  * @license GPL-3.0-or-later
  */
-final class Header implements Rule, Stringable
+final readonly class Header implements Rule, Stringable
 {
     /**
      * @param list<Author> $packageAuthors
      */
     public function __construct(
-        public readonly string $packageName,
-        public readonly Type $packageType,
-        public readonly array $packageAuthors = [],
-        public readonly ?CopyrightRange $copyrightRange = null,
+        public string $packageName,
+        public Type $packageType,
+        public array $packageAuthors = [],
+        public ?CopyrightRange $copyrightRange = null,
     ) {}
 
     public function __toString(): string

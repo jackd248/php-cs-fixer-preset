@@ -21,13 +21,13 @@ use KonradMichalik\PhpCsFixerPreset\Rules\Rule;
  * @author Konrad Michalik <hej@konradmichalik.dev>
  * @license GPL-3.0-or-later
  */
-final class Set implements Rule
+final readonly class Set implements Rule
 {
     /**
      * @param array<string, mixed> $rules
      */
     public function __construct(
-        private readonly array $rules,
+        private array $rules,
     ) {}
 
     public static function create(): self

@@ -24,11 +24,11 @@ use function sprintf;
  * @author Konrad Michalik <hej@konradmichalik.dev>
  * @license GPL-3.0-or-later
  */
-final class CopyrightRange implements Stringable
+final readonly class CopyrightRange implements Stringable
 {
     private function __construct(
-        public readonly ?int $from,
-        public readonly ?int $to,
+        public ?int $from,
+        public ?int $to,
     ) {}
 
     public function __toString(): string
