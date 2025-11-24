@@ -23,11 +23,11 @@ use function sprintf;
  * @author Konrad Michalik <hej@konradmichalik.dev>
  * @license GPL-3.0-or-later
  */
-final class Author implements Stringable
+final readonly class Author implements Stringable
 {
     private function __construct(
-        public readonly string $name,
-        public readonly string $emailAddress,
+        public string $name,
+        public string $emailAddress,
     ) {}
 
     public function __toString(): string
