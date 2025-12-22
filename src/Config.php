@@ -29,6 +29,15 @@ use function class_exists;
  */
 final class Config extends \PhpCsFixer\Config
 {
+    private Finder $finder;
+
+    public function __construct(string $name = 'default')
+    {
+        parent::__construct($name);
+        $this->finder = new Finder();
+        $this->setFinder($this->finder);
+    }
+
     public static function create(bool $skipDefaultSet = false): self
     {
         $config = new self();
@@ -38,8 +47,8 @@ final class Config extends \PhpCsFixer\Config
         }
 
         $config->setRiskyAllowed(true);
-        $config->getFinder()->ignoreDotFiles(false);
-        $config->getFinder()->ignoreVCSIgnored(true);
+        $config->finder->ignoreDotFiles(false);
+        $config->finder->ignoreVCSIgnored(true);
 
         // Enable parallel execution (PHP-CS-Fixer >= 3.57)
         if (class_exists(Runner\Parallel\ParallelConfig::class)) {
@@ -71,9 +80,10 @@ final class Config extends \PhpCsFixer\Config
     public function withFinder(Finder|callable $finder): self
     {
         if (!($finder instanceof Finder)) {
-            $finder = $finder($this->getFinder());
+            $finder = $finder($this->finder);
         }
 
+        $this->finder = $finder;
         $this->setFinder($finder);
 
         return $this;
