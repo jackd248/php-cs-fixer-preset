@@ -2,9 +2,9 @@
 
 # PHP-CS-Fixer Preset
 
-[![Coverage](https://img.shields.io/coverallsCoverage/github/jackd248/php-cs-fixer-preset?logo=coveralls)](https://coveralls.io/github/jackd248/php-cs-fixer-preset)
-[![CGL](https://img.shields.io/github/actions/workflow/status/jackd248/php-cs-fixer-preset/cgl.yml?label=cgl&logo=github)](https://github.com/jackd248/php-cs-fixer-preset/actions/workflows/cgl.yml)
-[![Tests](https://img.shields.io/github/actions/workflow/status/jackd248/php-cs-fixer-preset/tests.yml?label=tests&logo=github)](https://github.com/jackd248/php-cs-fixer-preset/actions/workflows/tests.yml)
+[![Coverage](https://img.shields.io/coverallsCoverage/github/konradmichalik/php-cs-fixer-preset?logo=coveralls)](https://coveralls.io/github/konradmichalik/php-cs-fixer-preset)
+[![CGL](https://img.shields.io/github/actions/workflow/status/konradmichalik/php-cs-fixer-preset/cgl.yml?label=cgl&logo=github)](https://github.com/konradmichalik/php-cs-fixer-preset/actions/workflows/cgl.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/konradmichalik/php-cs-fixer-preset/tests.yml?label=tests&logo=github)](https://github.com/konradmichalik/php-cs-fixer-preset/actions/workflows/tests.yml)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/konradmichalik/php-cs-fixer-preset/php?logo=php)](https://packagist.org/packages/konradmichalik/php-cs-fixer-preset)
 
 </div>

@@ -3316,12 +3316,12 @@
             "version": "0.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jackd248/php-doc-block-header-fixer.git",
+                "url": "https://github.com/konradmichalik/php-doc-block-header-fixer.git",
                 "reference": "9f5067f879e593f679ed07ab61d7c0a59f37e561"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jackd248/php-doc-block-header-fixer/zipball/9f5067f879e593f679ed07ab61d7c0a59f37e561",
+                "url": "https://api.github.com/repos/konradmichalik/php-doc-block-header-fixer/zipball/9f5067f879e593f679ed07ab61d7c0a59f37e561",
                 "reference": "9f5067f879e593f679ed07ab61d7c0a59f37e561",
                 "shasum": ""
             },
@@ -3368,8 +3368,8 @@
                 "phpdoc"
             ],
             "support": {
-                "issues": "https://github.com/jackd248/php-doc-block-header-fixer/issues",
-                "source": "https://github.com/jackd248/php-doc-block-header-fixer/tree/0.3.2"
+                "issues": "https://github.com/konradmichalik/php-doc-block-header-fixer/issues",
+                "source": "https://github.com/konradmichalik/php-doc-block-header-fixer/tree/0.3.2"
             },
             "time": "2025-11-24T14:10:46+00:00"
         },
